@@ -13,6 +13,7 @@
 		DA7F01132586707A00998D80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F01112586707A00998D80 /* Main.storyboard */; };
 		DA7F01152586707C00998D80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA7F01142586707C00998D80 /* Assets.xcassets */; };
 		DA7F01182586707C00998D80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7F01162586707C00998D80 /* LaunchScreen.storyboard */; };
+		DA7F0122258670EF00998D80 /* GestureClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = DA7F0121258670EF00998D80 /* GestureClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DA7F01142586707C00998D80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DA7F01172586707C00998D80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA7F01192586707C00998D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7F0121258670EF00998D80 /* GestureClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = GestureClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +58,12 @@
 		DA7F010A2586707A00998D80 /* GestureClassifier */ = {
 			isa = PBXGroup;
 			children = (
+				DA7F01142586707C00998D80 /* Assets.xcassets */,
 				DA7F010B2586707A00998D80 /* AppDelegate.swift */,
 				DA7F010D2586707A00998D80 /* SceneDelegate.swift */,
 				DA7F010F2586707A00998D80 /* ViewController.swift */,
+				DA7F0121258670EF00998D80 /* GestureClassifier.mlmodel */,
 				DA7F01112586707A00998D80 /* Main.storyboard */,
-				DA7F01142586707C00998D80 /* Assets.xcassets */,
 				DA7F01162586707C00998D80 /* LaunchScreen.storyboard */,
 				DA7F01192586707C00998D80 /* Info.plist */,
 			);
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA7F01102586707A00998D80 /* ViewController.swift in Sources */,
+				DA7F0122258670EF00998D80 /* GestureClassifier.mlmodel in Sources */,
 				DA7F010C2586707A00998D80 /* AppDelegate.swift in Sources */,
 				DA7F010E2586707A00998D80 /* SceneDelegate.swift in Sources */,
 			);
@@ -289,6 +293,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 62TKMM5MWT;
 				INFOPLIST_FILE = GestureClassifier/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,6 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 62TKMM5MWT;
 				INFOPLIST_FILE = GestureClassifier/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

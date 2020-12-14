@@ -1,12 +1,13 @@
 //
 //  SceneDelegate.swift
-//  GestureClassifier
+//  GestureRecognizer
 //
 //  Created by zero on 2020/12/13.
 //
 
 import UIKit
 
+@available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
