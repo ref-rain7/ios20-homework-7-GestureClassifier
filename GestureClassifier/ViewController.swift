@@ -30,8 +30,8 @@ class ViewController: UIViewController {
         )
     }
     
-    
-    
+        
+
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var confidenceLabel: UILabel!
     
@@ -46,6 +46,7 @@ class ViewController: UIViewController {
     var isDataAvailable = false
     
     override func viewDidLoad() {
+        print("view did load")
         super.viewDidLoad()
 
         do {
@@ -95,10 +96,14 @@ class ViewController: UIViewController {
         if bufferIndex == 0 {
             isDataAvailable = true
         }
-        process()
+        predict()
+        
+        DispatchQueue.main.async {
+            self.game()
+        }
     }
  
-    func process() {
+    func predict() {
         if isDataAvailable
             && bufferIndex % ViewController.windowOffset == 0
             && bufferIndex + ViewController.windowOffset <= ViewController.windowSize {
@@ -135,5 +140,83 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    
+    // MARK: Game
+    @IBOutlet weak var gestureLabel: UILabel!
+    @IBOutlet weak var countDownLabel: UILabel!
+    @IBOutlet weak var finishCountLabel: UILabel!
+    @IBOutlet weak var timeoutCountLabel: UILabel!
+    
+    var isPlaying = false
+    var frameCount = 0
+    let gestureDisplayLabels = ["Chop it", "Shake it", "Drive it"]
+    let gestureModelLabels = ["chop_it", "shake_it", "drive_it"]
+    var gestureIndex = 0
+    var secondsLeft = 0
+    var isRoundEnded = false
+    var finishCount = 0
+    var timeoutCount = 0
+    
+    @IBAction func toggleGameState(_ sender: UIButton) {
+        if !isPlaying {
+            isPlaying = true
+            frameCount = 0
+            finishCount = 0
+            timeoutCount = 0
+            sender.setTitle("End Game", for: .normal)
+            finishCountLabel.text = "0"
+            timeoutCountLabel.text = "0"
+            nextRound()
+        } else {
+            isPlaying = false
+            sender.setTitle("Start Game", for: .normal)
+            gestureLabel.text = "Do it"
+            countDownLabel.text = "-"
+        }
+    }
+    
+    func nextRound() {
+        secondsLeft = 3
+        isRoundEnded = false
+        gestureIndex = Int.random(in: 0..<gestureModelLabels.count)
+        gestureLabel.text = gestureDisplayLabels[gestureIndex]
+        countDownLabel.text = "3"
+    }
+    
+    func game() {
+        guard isPlaying else {
+            return
+        }
+        
+        frameCount += 1
+        frameCount %= Int(ViewController.samplesPerSecond)
+        if !isRoundEnded, gestureModelLabels[gestureIndex] == classifierOutput.activity {
+            frameCount = 0
+            isRoundEnded = true
+            finishCount += 1
+            secondsLeft = 1
+            countDownLabel.text = "✔︎"
+            finishCountLabel.text = String(finishCount)
+        } else if frameCount == 0 {
+            if !isRoundEnded {
+                if secondsLeft == 0 {
+                    isRoundEnded = true
+                    timeoutCount += 1
+                    secondsLeft = 1
+                    countDownLabel.text = "✘"
+                    timeoutCountLabel.text = String(timeoutCount)
+                } else {
+                    secondsLeft -= 1
+                    countDownLabel.text = String(secondsLeft)
+                }
+            } else if secondsLeft == 0 {
+                nextRound()
+            } else {
+                secondsLeft -= 1
+            }
+        }
+    }
+    
 }
 
